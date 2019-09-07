@@ -8,7 +8,7 @@ for player_instance in range(1, num_people + 1):
     print("\nPlayer " + str(player_instance))
     total = 0.0
     for iteration in range(0, 1000000000000):  # effectively infinite
-        part = damage / (2 ** (iteration * (num_people + 1) + player_instance))
+        part = damage / (2 ** (iteration * (num_people) + player_instance))
         # equation: sum_over_iteration((damage/2^(iteration * (num_people + 1) + player_instance)))
         total += part
         if part == 0:  # don't waste computer time
