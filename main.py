@@ -1,26 +1,25 @@
 import os
-#  equation = sum_n((damage/2^(nc + p)))
 
-c = int(input("How many people are in the group? "))
-d = int(input("What's the total damage? "))
+num_people = int(input("How many people are in the group? "))
+damage = int(input("What's the total damage? "))
 group_total = 0
 
-for i in range(1, c + 1):
-    print("\nPlayer " + str(i))
+for player_instance in range(1, num_people + 1):
+    print("\nPlayer " + str(player_instance))
     total = 0.0
-    for n in range(0, 1000000000000):
-        part = d/(2**(n*(c + 1) + i))
+    for iteration in range(0, 1000000000000):  # effectively infinite
+        part = damage / (2 ** (iteration * (num_people + 1) + player_instance))
+        # equation: sum_over_iteration((damage/2^(iteration * (num_people + 1) + player_instance)))
         total += part
-        if part == 0:
+        if part == 0:  # don't waste computer time
+            print("")
             break
-        if n == 99:
-            print(part)
-        elif n % 20 == 0:
+        elif iteration % 20 == 0:
             print(part, end=" | ")
 
-    group_total += total
+    group_total += total  # add total damage across all players
 
-    print("Total damage to player " + str(i) + ": " + str(total) + "\n")
+    print("Total damage to player " + str(player_instance) + ": " + str(total) + "\n")
 
 print("Group total = " + str(group_total))
 
